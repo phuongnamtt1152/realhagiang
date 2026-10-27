@@ -1,0 +1,1013 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Hành Trình Hà Giang</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: bản đồ dạng map-app bám dính bên trái, bảng checklist cuộn bên phải; dưới 1000px xếp chồng. */
+:root{
+  --bg:#f6f3f2; --surface:#ffffff; --surface-2:#efebe9; --surface-3:#e6e0dd;
+  --line:#ded5d1; --line-soft:#eae3e0;
+  --fg:#211b1e; --muted:#7c7074; --faint:#a3979b;
+  --accent:#c0396c; --accent-ink:#8e2550; --accent-soft:#fae1ea;
+  --green:#4e7c3f; --green-soft:#e3eedd;
+  --amber:#b9801f;
+  --slate:#5b6b80; --slate-soft:#e6ebf1;
+  --blue:#1a73e8;
+  /* bảng màu bản đồ */
+  --m-base:#e8eedb; --m-low:#dceac4; --m-mid:#dfddb9; --m-high:#dcc9a4; --m-karst:#d9d2c6;
+  --m-water:#a7cfe6; --m-water-ink:#4f87a6;
+  --m-road:#ffffff; --m-road-case:#d8d2ca;
+  --m-main:#f7c662; --m-main-case:#dda93c;
+  --m-ink:#5e5a57; --m-ink2:#8a8481; --m-border:#b9a9b5; --m-halo:#ffffff;
+  --shadow:0 1px 2px rgba(33,27,30,.06), 0 8px 24px -14px rgba(33,27,30,.28);
+  --r:10px;
+  --f-display:"Anton","Be Vietnam Pro",system-ui,sans-serif;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-num:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#151114; --surface:#1d181c; --surface-2:#252028; --surface-3:#2f2831;
+  --line:#3a323a; --line-soft:#2b242c;
+  --fg:#f2ecef; --muted:#a3969c; --faint:#776b71;
+  --accent:#ef6e9a; --accent-ink:#ffa9c4; --accent-soft:#3c1f2c;
+  --green:#8cc06c; --green-soft:#23301c;
+  --amber:#e0a94a;
+  --slate:#93a6bc; --slate-soft:#20272f;
+  --blue:#8ab4f8;
+  --m-base:#23262a; --m-low:#272d27; --m-mid:#2e2f28; --m-high:#38322a; --m-karst:#332f2e;
+  --m-water:#2e5267; --m-water-ink:#7fb4d0;
+  --m-road:#49464d; --m-road-case:#2b282e;
+  --m-main:#8a6723; --m-main-case:#5f4717;
+  --m-ink:#b6aeb2; --m-ink2:#8d858a; --m-border:#5b4f59; --m-halo:#1a1a1d;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.8);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#151114; --surface:#1d181c; --surface-2:#252028; --surface-3:#2f2831;
+  --line:#3a323a; --line-soft:#2b242c;
+  --fg:#f2ecef; --muted:#a3969c; --faint:#776b71;
+  --accent:#ef6e9a; --accent-ink:#ffa9c4; --accent-soft:#3c1f2c;
+  --green:#8cc06c; --green-soft:#23301c;
+  --amber:#e0a94a;
+  --slate:#93a6bc; --slate-soft:#20272f;
+  --blue:#8ab4f8;
+  --m-base:#23262a; --m-low:#272d27; --m-mid:#2e2f28; --m-high:#38322a; --m-karst:#332f2e;
+  --m-water:#2e5267; --m-water-ink:#7fb4d0;
+  --m-road:#49464d; --m-road-case:#2b282e;
+  --m-main:#8a6723; --m-main-case:#5f4717;
+  --m-ink:#b6aeb2; --m-ink2:#8d858a; --m-border:#5b4f59; --m-halo:#1a1a1d;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -16px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:14px;line-height:1.5;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 40px;max-width:1340px;margin:0 auto}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 18px;margin-bottom:16px}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(28px,5.2vw,44px);line-height:.98;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1 .hl{color:var(--accent)}
+.sub{color:var(--muted);font-size:13px;max-width:52ch;margin:4px 0 0}
+.live{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 11px;margin-left:auto;white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--faint);flex:none}
+.live.on .dot{background:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+.live.off .dot{background:var(--amber)}
+
+main{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr);gap:18px;align-items:start}
+@media (max-width:1000px){ main{grid-template-columns:minmax(0,1fr)} }
+
+/* ---------- map ---------- */
+.mapcard{position:sticky;top:calc(env(safe-area-inset-top,0px) + 10px);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;z-index:20}
+.mapbox{position:relative;background:var(--m-base)}
+svg#map{display:block;width:100%;height:clamp(380px,66vh,660px);cursor:grab;touch-action:pan-y}
+@media (max-width:1000px){ svg#map{height:clamp(300px,46vh,440px)} }
+svg#map.grabbing{cursor:grabbing}
+svg#map.pinning{cursor:crosshair}
+
+.land{fill:var(--m-base)}
+.terr{opacity:.95}
+.tex{opacity:.1}
+.water{fill:none;stroke:var(--m-water);stroke-linecap:round;stroke-linejoin:round}
+.wlabel{fill:var(--m-water-ink);font-size:10.5px;font-style:italic;font-weight:500;paint-order:stroke;stroke:var(--m-halo);stroke-width:2.6;stroke-linejoin:round}
+.rcase{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.rfill{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.bord{fill:none;stroke:var(--m-border);stroke-width:1.3;stroke-dasharray:1 3.4;stroke-linecap:round;opacity:.9}
+.bord.intl{stroke-width:2;stroke-dasharray:7 3 1.5 3;opacity:.75}
+.dlabel{fill:var(--m-ink);font-size:12px;font-weight:600;letter-spacing:.02em;paint-order:stroke;stroke:var(--m-halo);stroke-width:3;stroke-linejoin:round}
+.nlabel{fill:var(--m-ink2);font-size:11.5px;font-weight:600;letter-spacing:.18em;opacity:.7;text-transform:uppercase;paint-order:stroke;stroke:var(--m-halo);stroke-width:3;stroke-linejoin:round}
+.shield text{fill:#4a3a12;font-size:8.5px;font-weight:700}
+.shield rect{fill:var(--m-main);stroke:var(--m-main-case);stroke-width:1}
+:root[data-theme="dark"] .shield text{fill:#f2dda7}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .shield text{fill:#f2dda7} }
+
+.ghost{cursor:pointer}
+.ghost circle{fill:var(--m-ink2);opacity:.45}
+.ghost text{fill:var(--m-ink);font-size:10.5px;font-weight:500;opacity:0;paint-order:stroke;stroke:var(--m-halo);stroke-width:3;stroke-linejoin:round}
+.ghost:hover circle{fill:var(--accent);opacity:1}
+.ghost:hover text{opacity:1}
+
+.rcase2{fill:none;stroke:#fff;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+:root[data-theme="dark"] .rcase2{stroke:#11151c}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .rcase2{stroke:#11151c} }
+.rline{fill:none;stroke-width:4.2;stroke-linecap:round;stroke-linejoin:round;opacity:.95}
+
+.pin{cursor:pointer;filter:drop-shadow(0 1.5px 1.5px rgba(0,0,0,.32))}
+.pin .body{stroke:#fff;stroke-width:1.4}
+:root[data-theme="dark"] .pin .body{stroke:#15171a}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .pin .body{stroke:#15171a} }
+.pin .num{fill:#fff;font-size:10px;font-weight:700;text-anchor:middle}
+.pin .cap{font-size:11px;font-weight:600;fill:var(--fg);paint-order:stroke;stroke:var(--m-halo);stroke-width:3.4;stroke-linejoin:round}
+.pin.s-plan .body{fill:var(--slate)}
+.pin.s-done .body{fill:var(--green)}
+.pin.s-here .body{fill:var(--accent)}
+.pin.s-skip .body{fill:var(--faint)}
+.pin.s-skip .cap{opacity:.55}
+.pin.dim{opacity:.26}
+.pin.hot .body{stroke:var(--accent);stroke-width:2.4}
+.pin.hot .cap{fill:var(--accent-ink)}
+.ring{fill:none;stroke:var(--accent);stroke-width:2;opacity:0}
+.pin.s-here .ring{animation:ping 1.9s ease-out infinite}
+.pin.flash .ring{animation:ping 1.1s ease-out 2}
+@keyframes ping{0%{r:7;opacity:.6;stroke-width:3}100%{r:28;opacity:0;stroke-width:1}}
+@media (prefers-reduced-motion:reduce){ .pin .ring{animation:none!important} }
+
+/* map chrome */
+.ctl{position:absolute;display:flex;flex-direction:column;gap:1px;right:10px;top:10px;background:var(--line);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
+.ctl button{background:var(--surface);border:0;width:32px;height:31px;font-size:15px;color:var(--muted);line-height:1;display:grid;place-items:center}
+.ctl button:hover{color:var(--fg);background:var(--surface-2)}
+.ctl button.fit{font-size:11px;font-weight:600}
+.gmaps{position:absolute;left:10px;top:10px;display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;color:var(--fg);text-decoration:none;box-shadow:var(--shadow)}
+.gmaps:hover{border-color:var(--blue);color:var(--blue)}
+.gmaps svg{width:13px;height:13px;flex:none}
+.legend{position:absolute;left:10px;bottom:28px;right:10px;display:flex;flex-wrap:wrap;gap:4px 6px;pointer-events:none}
+.legend span{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);background:color-mix(in srgb,var(--surface) 88%,transparent);border-radius:999px;padding:2px 8px}
+.sw{width:8px;height:8px;border-radius:50%;flex:none}
+.sbar{position:absolute;left:10px;bottom:7px;display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--m-ink2);pointer-events:none}
+.sbar i{display:block;height:5px;border:1px solid var(--m-ink2);border-top:0;width:70px}
+.attr{position:absolute;right:8px;bottom:6px;font-size:10px;color:var(--m-ink2);background:color-mix(in srgb,var(--surface) 80%,transparent);border-radius:4px;padding:1px 6px;pointer-events:none}
+
+/* ---------- panel ---------- */
+.panel{display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.pad{padding:12px}
+.addwrap{position:relative}
+.addrow{display:flex;gap:8px;align-items:center}
+.addrow input[type=text]{flex:1;min-width:0;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.addrow input[type=text]::placeholder{color:var(--faint)}
+.addrow input[type=text]:focus{border-color:var(--accent);background:var(--surface);outline:none}
+.pinbtn{background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13px;white-space:nowrap;color:var(--muted)}
+.pinbtn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.sugg{position:absolute;z-index:30;left:0;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);max-height:300px;overflow:auto;padding:5px}
+.sugg[hidden]{display:none!important}
+.sg{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:7px;cursor:pointer}
+.sg:hover,.sg.sel{background:var(--surface-2)}
+.sg .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sg .dt{font-size:11px;color:var(--muted);white-space:nowrap}
+.sg .ic{width:9px;height:9px;border-radius:2px;flex:none;background:var(--accent);opacity:.75}
+.sg.used{opacity:.45}
+.sg.new .ic{border-radius:50%;background:var(--green)}
+.sgempty{padding:10px;color:var(--muted);font-size:13px}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tab{background:transparent;border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:13px;color:var(--muted);font-weight:500}
+.tab:hover{border-color:var(--accent);color:var(--fg)}
+.tab.on{background:var(--fg);border-color:var(--fg);color:var(--bg);font-weight:600}
+.tab .ct{font-variant-numeric:tabular-nums;opacity:.6;margin-left:5px;font-size:11px}
+.tab.add{color:var(--accent);border-style:dashed}
+
+.sumgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line-soft);border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+@media (max-width:460px){ .sumgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.st{background:var(--surface);padding:10px 12px;min-width:0}
+.st .k{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.st .v{font-family:var(--f-display);font-size:23px;line-height:1.15;margin-top:2px;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
+.st .v small{font-family:var(--f-body);font-size:12px;font-weight:500;color:var(--muted)}
+
+.lhead,.row{display:grid;grid-template-columns:26px minmax(0,1fr) 54px 74px 110px 100px 52px 26px 26px;gap:6px;align-items:center}
+.lhead{padding:7px 12px;border-bottom:1px solid var(--line);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.rows{display:flex;flex-direction:column}
+.row{padding:8px 12px;border-bottom:1px solid var(--line-soft)}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--surface-2)}
+.row.hot{background:var(--accent-soft)}
+.row .idx{font-family:var(--f-num);font-size:11px;color:var(--faint);text-align:right}
+.nmwrap{min-width:0}
+.nm2{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dt2{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row select,.row input{width:100%;min-width:0;background:var(--surface-2);border:1px solid transparent;border-radius:6px;padding:5px 6px;font-size:12.5px}
+.row select:hover,.row input:hover{border-color:var(--line)}
+.row select:focus,.row input:focus{border-color:var(--accent);background:var(--surface);outline:none}
+.row input.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--f-num);font-size:12px}
+.row select.st-plan{color:var(--slate);background:var(--slate-soft)}
+.row select.st-here{color:var(--accent-ink);background:var(--accent-soft);font-weight:600}
+.row select.st-done{color:var(--green);background:var(--green-soft)}
+.row select.st-skip{color:var(--faint)}
+.del,.gm{background:transparent;border:0;color:var(--faint);line-height:1;padding:3px 4px;border-radius:6px;text-decoration:none;display:inline-grid;place-items:center}
+.del{font-size:17px}
+.gm{font-size:13px}
+.del:hover{color:var(--accent);background:var(--accent-soft)}
+.gm:hover{color:var(--blue);background:var(--slate-soft)}
+.empty{padding:34px 18px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--fg);font-size:15px;margin-bottom:5px}
+.foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.foot button,.foot a.btn{background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:5px 11px;font-size:12px;color:var(--muted);text-decoration:none;display:inline-block}
+.foot button:hover,.foot a.btn:hover{color:var(--fg);border-color:var(--accent)}
+.foot a.btn.gmroute{color:var(--blue);border-color:color-mix(in srgb,var(--blue) 40%,var(--line))}
+.foot a.btn.gmroute:hover{border-color:var(--blue);color:var(--blue)}
+.spacer{margin-left:auto}
+
+@media (max-width:620px){
+  .lhead{display:none}
+  .row{grid-template-columns:1fr auto auto;grid-template-areas:"nm gm del" "fields fields fields";gap:8px;padding:11px 12px}
+  .row .idx{display:none}
+  .nmwrap{grid-area:nm}
+  .gm{grid-area:gm;align-self:start}
+  .del{grid-area:del;align-self:start}
+  .row .f{grid-area:fields;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+}
+.f{display:contents}
+@media (max-width:620px){ .f{display:grid} }
+.fl{display:none;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:2px}
+@media (max-width:620px){ .fl{display:block} }
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:13px;z-index:60;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+.note{font-size:12px;color:var(--muted);padding:0 2px}
+.note b{color:var(--fg);font-weight:600}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>Hành trình <span class="hl">Hà Giang</span></h1>
+      <p class="sub">Điền địa điểm vào bảng, điểm đó sáng lên trên bản đồ. Lộ trình từng ngày tự nối thành đường đi, bấm một nút là mở sang Google Maps thật để dẫn đường.</p>
+    </div>
+    <div class="live" id="live"><span class="dot"></span><span id="liveTxt">Đang kết nối…</span></div>
+  </div>
+
+  <main>
+    <section class="mapcard">
+      <div class="mapbox">
+        <svg id="map" role="img" aria-label="Bản đồ Hà Giang với các điểm trong lịch trình"></svg>
+        <a class="gmaps" id="gmArea" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=H%C3%A0%20Giang%2C%20Vi%E1%BB%87t%20Nam">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5"/></svg>
+          Mở Google Maps
+        </a>
+        <div class="ctl">
+          <button id="zIn" title="Phóng to" aria-label="Phóng to">+</button>
+          <button id="zOut" title="Thu nhỏ" aria-label="Thu nhỏ">−</button>
+          <button id="zFit" class="fit" title="Vừa khít lộ trình">⤢</button>
+        </div>
+        <div class="legend">
+          <span><i class="sw" style="background:var(--slate)"></i>Dự kiến</span>
+          <span><i class="sw" style="background:var(--accent)"></i>Đang ở đây</span>
+          <span><i class="sw" style="background:var(--green)"></i>Đã đi</span>
+        </div>
+        <div class="sbar"><i></i><span id="sbarTxt">—</span></div>
+        <div class="attr">Sơ đồ phác hoạ · vị trí điểm theo toạ độ</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="card pad addwrap">
+        <div class="addrow">
+          <input type="text" id="q" autocomplete="off" spellcheck="false" placeholder="Gõ tên địa điểm: Mã Pì Lèng, Lũng Cú, Thẩm Mã…" aria-label="Thêm địa điểm">
+          <button class="pinbtn" id="pinMode" title="Bật rồi bấm lên bản đồ để ghim điểm mới">Ghim trên bản đồ</button>
+        </div>
+        <div class="sugg" id="sugg" hidden></div>
+      </div>
+
+      <div class="tabs" id="tabs"></div>
+
+      <div class="sumgrid" id="sum"></div>
+
+      <div class="card">
+        <div class="lhead">
+          <div></div><div>Địa điểm</div><div>Ngày</div><div>Buổi</div><div>Trạng thái</div><div>Chi phí (đ)</div><div>Giờ</div><div></div><div></div>
+        </div>
+        <div class="rows" id="rows"></div>
+        <div class="empty" id="empty" hidden>
+          <b>Chưa có điểm nào trong lịch</b>
+          Gõ tên một địa điểm ở ô phía trên để bắt đầu, hoặc bấm “Ghim trên bản đồ” rồi chọn vị trí.
+        </div>
+        <div class="foot">
+          <span id="cnt">—</span>
+          <span class="spacer"></span>
+          <a class="btn gmroute" id="gmRoute" target="_blank" rel="noopener" href="https://www.google.com/maps">Chỉ đường trên Google Maps</a>
+          <button id="copy">Sao chép lịch trình</button>
+          <button id="clearDone">Xoá điểm đã bỏ qua</button>
+        </div>
+      </div>
+
+      <p class="note"><b>Bản đồ trong trang là sơ đồ phác hoạ</b> — vị trí các điểm đặt theo toạ độ nên tương quan giữa chúng là đúng, còn đường biên và địa hình chỉ vẽ khái quát. Cần bản đồ vệ tinh, địa hình thật hay dẫn đường thì bấm nút Google Maps ở từng dòng.</p>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============ 1. Phép chiếu Web Mercator ============ */
+var LON0=104.18, LON1=105.70, LAT0=21.95, LAT1=23.52;
+function mY(la){ var r=la*Math.PI/180; return Math.log(Math.tan(Math.PI/4+r/2)); }
+var MY1=mY(LAT1), MY0=mY(LAT0);
+var MW=800, MH=MW*(MY1-MY0)/((LON1-LON0)*Math.PI/180);
+function P(lo,la){ return [ (lo-LON0)/(LON1-LON0)*MW, (MY1-mY(la))/(MY1-MY0)*MH ]; }
+function invP(x,y){
+  var lo=LON0+x/MW*(LON1-LON0);
+  var my=MY1-y/MH*(MY1-MY0);
+  var la=(2*Math.atan(Math.exp(my))-Math.PI/2)*180/Math.PI;
+  return {lo:lo,la:la};
+}
+function poly(a){ return a.map(function(p){var q=P(p[0],p[1]);return q[0].toFixed(1)+","+q[1].toFixed(1);}).join(" "); }
+
+/* ============ 2. Dữ liệu nền bản đồ (phác hoạ) ============ */
+var PROVINCE=[[104.28,22.72],[104.33,22.80],[104.42,22.86],[104.52,22.84],[104.60,22.90],[104.70,22.94],[104.78,22.92],[104.86,22.98],[104.95,23.04],[105.00,23.12],[105.08,23.16],[105.14,23.14],[105.18,23.22],[105.24,23.28],[105.28,23.33],[105.315,23.392],[105.35,23.36],[105.37,23.30],[105.44,23.27],[105.52,23.22],[105.56,23.14],[105.52,23.06],[105.56,22.98],[105.50,22.90],[105.52,22.80],[105.46,22.72],[105.48,22.64],[105.40,22.56],[105.42,22.46],[105.34,22.38],[105.30,22.28],[105.20,22.22],[105.08,22.18],[104.98,22.12],[104.88,22.16],[104.78,22.22],[104.68,22.20],[104.60,22.28],[104.52,22.34],[104.46,22.44],[104.38,22.50],[104.32,22.60]];
+/* biên giới quốc tế = phần phía bắc của đường biên (chỉ số 2..20) */
+var INTL=PROVINCE.slice(2,21);
+
+/* khối địa hình khái quát: [lon,lat,bán kính kinh độ,bán kính vĩ độ,loại] */
+var RELIEF=[
+ [104.80,22.80,0.17,0.13,"high"],   // Tây Côn Lĩnh
+ [104.67,22.70,0.17,0.11,"high"],   // Hoàng Su Phì – Chiêu Lầu Thi
+ [104.52,22.60,0.13,0.10,"mid"],    // Xín Mần
+ [105.33,23.27,0.15,0.11,"karst"],  // cao nguyên đá Đồng Văn
+ [105.42,23.16,0.12,0.10,"karst"],  // Mèo Vạc
+ [105.30,23.36,0.09,0.06,"karst"],  // Lũng Cú
+ [105.10,23.10,0.18,0.10,"high"],   // Quản Bạ – Yên Minh
+ [105.18,22.98,0.11,0.08,"mid"],    // Du Già
+ [105.27,22.76,0.17,0.12,"mid"],    // Bắc Mê
+ [104.95,22.60,0.12,0.14,"mid"],
+ [105.02,22.44,0.13,0.20,"low"],    // thung lũng sông Lô
+ [104.88,22.28,0.19,0.13,"low"],    // Bắc Quang – Quang Bình
+ [104.99,22.84,0.07,0.06,"low"]     // lòng chảo TP Hà Giang
+];
+
+var RIVERS=[
+ {n:"Sông Nho Quế",w:3.2,p:[[105.28,23.36],[105.31,23.30],[105.345,23.255],[105.40,23.235],[105.44,23.18],[105.47,23.10],[105.52,23.00],[105.54,22.92]],lab:[105.462,23.142]},
+ {n:"Sông Lô",w:3.6,p:[[104.80,22.92],[104.90,22.86],[104.98,22.82],[105.02,22.66],[105.06,22.50],[105.10,22.34],[105.14,22.20]],lab:[105.072,22.44]},
+ {n:"Sông Miện",w:2.4,p:[[105.02,23.10],[105.00,22.99],[104.985,22.88],[104.98,22.825]],lab:[105.018,23.03]},
+ {n:"Sông Gâm",w:2.8,p:[[105.22,22.86],[105.28,22.76],[105.30,22.62],[105.26,22.46]],lab:[105.305,22.66]},
+ {n:"Sông Chảy",w:2.4,p:[[104.52,22.66],[104.60,22.52],[104.66,22.38],[104.70,22.24]],lab:[104.63,22.44]}
+];
+
+var ROADS=[
+ {t:"main",n:"QL4C",p:[[104.9836,22.8233],[104.975,22.90],[104.962,22.952],[104.972,23.012],[104.976,23.047],[104.985,23.072],[105.02,23.085],[105.07,23.095],[105.11,23.095],[105.147,23.117],[105.19,23.14],[105.225,23.165],[105.248,23.195],[105.225,23.206],[105.24,23.222],[105.27,23.247],[105.286,23.283],[105.31,23.27],[105.345,23.272],[105.362,23.278],[105.39,23.265],[105.418,23.245],[105.432,23.228],[105.425,23.196],[105.413,23.158]],shield:[105.19,23.14]},
+ {t:"spur",p:[[105.286,23.283],[105.30,23.315],[105.3165,23.3618]]},
+ {t:"main",n:"QL2",p:[[104.9836,22.8233],[104.95,22.70],[104.92,22.58],[104.90,22.47],[104.93,22.36],[104.98,22.24],[105.03,22.15]],shield:[104.915,22.52]},
+ {t:"sec",p:[[104.90,22.52],[104.80,22.60],[104.72,22.68],[104.68,22.74],[104.60,22.70],[104.54,22.66],[104.49,22.63]]},
+ {t:"main",n:"QL34",p:[[104.9836,22.8233],[105.08,22.80],[105.18,22.80],[105.28,22.76],[105.40,22.72]],shield:[105.22,22.785]},
+ {t:"sec",p:[[105.147,23.117],[105.18,23.05],[105.19,22.99],[105.22,22.93]]},
+ {t:"sec",p:[[104.9836,22.8233],[104.90,22.86],[104.83,22.90],[104.80,22.93]]},
+ {t:"sec",p:[[105.413,23.158],[105.45,23.11],[105.50,23.07]]}
+];
+
+var DLAB=[
+ {n:"Quản Bạ",lo:104.935,la:23.085},{n:"Yên Minh",lo:105.125,la:23.055},
+ {n:"Đồng Văn",lo:105.285,la:23.325},{n:"Mèo Vạc",lo:105.47,la:23.225},
+ {n:"Vị Xuyên",lo:104.80,la:22.74},{n:"Bắc Mê",lo:105.345,la:22.805},
+ {n:"Hoàng Su Phì",lo:104.63,la:22.645},{n:"Xín Mần",lo:104.43,la:22.555},
+ {n:"Bắc Quang",lo:104.93,la:22.395},{n:"Quang Bình",lo:104.70,la:22.335}
+];
+var NLAB=[
+ {n:"Trung Quốc",lo:104.72,la:23.24,a:"middle"},
+ {n:"Cao Bằng",lo:105.665,la:22.78,a:"end"},
+ {n:"Tuyên Quang",lo:105.10,la:22.03,a:"middle"},
+ {n:"Lào Cai",lo:104.215,la:22.34,a:"start"},
+ {n:"Yên Bái",lo:104.45,la:22.04,a:"middle"}
+];
+
+/* ============ 3. Danh sách địa điểm gợi ý ============ */
+var PRESETS=[
+ {n:"TP. Hà Giang",d:"TP. Hà Giang",la:22.8233,lo:104.9836},
+ {n:"Cột mốc Km0 Hà Giang",d:"TP. Hà Giang",la:22.8283,lo:104.9794},
+ {n:"Thôn Tha (làng Tày)",d:"TP. Hà Giang",la:22.8050,lo:104.9450},
+ {n:"Đồi chè Phương Độ",d:"TP. Hà Giang",la:22.8100,lo:104.9300},
+ {n:"Cửa khẩu Thanh Thủy",d:"Vị Xuyên",la:22.9330,lo:104.8300},
+ {n:"Hồ Noong",d:"Vị Xuyên",la:22.7200,lo:104.9200},
+ {n:"Đèo Bắc Sum",d:"Vị Xuyên",la:22.9500,lo:104.9600},
+ {n:"Cổng trời Quản Bạ",d:"Quản Bạ",la:23.0470,lo:104.9760},
+ {n:"Núi đôi Cô Tiên",d:"Quản Bạ",la:23.0600,lo:104.9830},
+ {n:"Thị trấn Tam Sơn",d:"Quản Bạ",la:23.0720,lo:104.9900},
+ {n:"Hang Lùng Khúy",d:"Quản Bạ",la:23.0850,lo:105.0250},
+ {n:"Làng văn hoá Nặm Đăm",d:"Quản Bạ",la:23.0400,lo:104.9950},
+ {n:"Thạch Sơn Thần",d:"Quản Bạ",la:23.0150,lo:104.9700},
+ {n:"Rừng thông Yên Minh",d:"Yên Minh",la:23.0950,lo:105.1100},
+ {n:"Thị trấn Yên Minh",d:"Yên Minh",la:23.1170,lo:105.1470},
+ {n:"Đèo Mậu Duệ",d:"Yên Minh",la:23.1450,lo:105.2600},
+ {n:"Du Già",d:"Yên Minh",la:22.9900,lo:105.1900},
+ {n:"Thác Du Già",d:"Yên Minh",la:22.9850,lo:105.1950},
+ {n:"Dốc Thẩm Mã",d:"Yên Minh",la:23.2060,lo:105.2250},
+ {n:"Dốc Chín Khoanh",d:"Yên Minh",la:23.2200,lo:105.2400},
+ {n:"Phố Cáo",d:"Đồng Văn",la:23.1950,lo:105.2480},
+ {n:"Thung lũng Sủng Là",d:"Đồng Văn",la:23.2470,lo:105.2700},
+ {n:"Nhà của Pao",d:"Đồng Văn",la:23.2460,lo:105.2740},
+ {n:"Phó Bảng – phố cổ ngủ quên",d:"Đồng Văn",la:23.2870,lo:105.2560},
+ {n:"Dinh thự Vua Mèo (Nhà Vương)",d:"Đồng Văn",la:23.2830,lo:105.2860},
+ {n:"Bãi đá mặt trăng Sà Phìn",d:"Đồng Văn",la:23.2900,lo:105.3000},
+ {n:"Cột cờ Lũng Cú",d:"Đồng Văn",la:23.3618,lo:105.3165},
+ {n:"Làng Lô Lô Chải",d:"Đồng Văn",la:23.3550,lo:105.3210},
+ {n:"Thị trấn Đồng Văn",d:"Đồng Văn",la:23.2780,lo:105.3620},
+ {n:"Phố cổ Đồng Văn",d:"Đồng Văn",la:23.2770,lo:105.3630},
+ {n:"Chợ phiên Đồng Văn (sáng CN)",d:"Đồng Văn",la:23.2775,lo:105.3650},
+ {n:"Đồn Cao Đồng Văn",d:"Đồng Văn",la:23.2810,lo:105.3590},
+ {n:"Thung lũng Thiên Hương",d:"Đồng Văn",la:23.2900,lo:105.3700},
+ {n:"Đèo Lũng Phìn",d:"Đồng Văn",la:23.1700,lo:105.3300},
+ {n:"Đèo Mã Pì Lèng",d:"Mèo Vạc",la:23.2450,lo:105.4180},
+ {n:"Mỏm đá tử thần",d:"Mèo Vạc",la:23.2470,lo:105.4230},
+ {n:"Vách đá trắng (Skywalk)",d:"Mèo Vạc",la:23.2380,lo:105.4330},
+ {n:"Hẻm Tu Sản",d:"Mèo Vạc",la:23.2320,lo:105.4050},
+ {n:"Bến thuyền Tà Làng – sông Nho Quế",d:"Mèo Vạc",la:23.2250,lo:105.4000},
+ {n:"Bến thuyền Xín Cái",d:"Mèo Vạc",la:23.2550,lo:105.4600},
+ {n:"Thị trấn Mèo Vạc",d:"Mèo Vạc",la:23.1580,lo:105.4130},
+ {n:"Chợ bò Mèo Vạc (sáng CN)",d:"Mèo Vạc",la:23.1600,lo:105.4110},
+ {n:"Chợ tình Khâu Vai",d:"Mèo Vạc",la:23.0950,lo:105.5000},
+ {n:"Ruộng bậc thang Hoàng Su Phì",d:"Hoàng Su Phì",la:22.7400,lo:104.6800},
+ {n:"Đỉnh Chiêu Lầu Thi",d:"Hoàng Su Phì",la:22.6500,lo:104.7600},
+ {n:"Bản Phùng",d:"Hoàng Su Phì",la:22.7000,lo:104.6300},
+ {n:"Thông Nguyên",d:"Hoàng Su Phì",la:22.6900,lo:104.6100},
+ {n:"Thác Tiên – Đèo Gió",d:"Xín Mần",la:22.6200,lo:104.5600},
+ {n:"Thị trấn Cốc Pài (Xín Mần)",d:"Xín Mần",la:22.6300,lo:104.4900},
+ {n:"Thị trấn Việt Quang",d:"Bắc Quang",la:22.4700,lo:104.8500},
+ {n:"Lòng hồ thuỷ điện Bắc Mê",d:"Bắc Mê",la:22.7600,lo:105.2600}
+];
+
+var SLOTS=[["","—"],["sang","Sáng"],["trua","Trưa"],["chieu","Chiều"],["toi","Tối"]];
+var SLOTO={"":0,sang:1,trua:2,chieu:3,toi:4};
+var STATUS=[["plan","Dự kiến"],["here","Đang ở đây"],["done","Đã đi"],["skip","Bỏ qua"]];
+
+/* ============ 4. Trạng thái ============ */
+var stops=[], days=3, filter="all", hot=null;
+var db=null, roomNs=null, cloud=false, pinning=false, fitted=false;
+var rowEls={}, timers={};
+var $=function(s){return document.querySelector(s);};
+var svg=$("#map");
+
+function uid(){return "s"+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function vnd(n){ n=Math.round(Number(n)||0); return n.toLocaleString("vi-VN"); }
+function toast(m){ var t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove("show");},2400); }
+function gmTerm(s){ return (s.dist==="Tự thêm") ? (Number(s.la).toFixed(5)+","+Number(s.lo).toFixed(5)) : (s.name+", Hà Giang, Việt Nam"); }
+function gmUrl(s){ return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(gmTerm(s)); }
+
+/* ============ 5. Dựng bản đồ ============ */
+var NS="http://www.w3.org/2000/svg";
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a){if(a[k]!=null)e.setAttribute(k,a[k]);}return e;}
+var gWorld,gLab,gGhost,gRoute,gPin;
+
+function buildMap(){
+  svg.setAttribute("viewBox","0 0 "+MW.toFixed(0)+" "+MH.toFixed(0));
+  svg.textContent="";
+
+  var defs=el("defs",{});
+  var cp=el("clipPath",{id:"cpLand"}); cp.appendChild(el("polygon",{points:poly(PROVINCE)})); defs.appendChild(cp);
+  var f=el("filter",{id:"soft",x:"-20%",y:"-20%",width:"140%",height:"140%"});
+  f.appendChild(el("feGaussianBlur",{stdDeviation:"26"})); defs.appendChild(f);
+  var f2=el("filter",{id:"grain",x:"0%",y:"0%",width:"100%",height:"100%"});
+  f2.appendChild(el("feTurbulence",{type:"fractalNoise",baseFrequency:"0.012",numOctaves:"4",seed:"7"}));
+  f2.appendChild(el("feColorMatrix",{type:"saturate",values:"0"}));
+  defs.appendChild(f2);
+  svg.appendChild(defs);
+
+  gWorld=el("g",{id:"world"});
+
+  /* nền đất + khối địa hình khái quát */
+  gWorld.appendChild(el("polygon",{points:poly(PROVINCE),"class":"land"}));
+  var gT=el("g",{"class":"terr","clip-path":"url(#cpLand)",filter:"url(#soft)"});
+  RELIEF.forEach(function(r){
+    var c=P(r[0],r[1]), a=P(r[0]+r[2],r[1]), b=P(r[0],r[1]-r[3]);
+    var e2=el("ellipse",{cx:c[0].toFixed(1),cy:c[1].toFixed(1),rx:(a[0]-c[0]).toFixed(1),ry:(b[1]-c[1]).toFixed(1)});
+    e2.setAttribute("fill","var(--m-"+r[4]+")");
+    gT.appendChild(e2);
+  });
+  gWorld.appendChild(gT);
+  var gx=el("g",{"class":"tex","clip-path":"url(#cpLand)"});
+  gx.appendChild(el("rect",{x:0,y:0,width:MW,height:MH,filter:"url(#grain)"}));
+  gWorld.appendChild(gx);
+
+  /* sông */
+  RIVERS.forEach(function(r){
+    gWorld.appendChild(el("polyline",{points:poly(r.p),"class":"water","stroke-width":r.w,"vector-effect":"non-scaling-stroke"}));
+  });
+
+  /* đường: casing trước, fill sau */
+  ROADS.forEach(function(r){
+    var w = r.t==="main"?5.6:(r.t==="spur"?4.2:3.8);
+    var cs = r.t==="sec" ? "var(--m-road-case)" : "var(--m-main-case)";
+    var p=el("polyline",{points:poly(r.p),"class":"rcase","stroke-width":w,"vector-effect":"non-scaling-stroke"});
+    p.setAttribute("stroke",cs); gWorld.appendChild(p);
+  });
+  ROADS.forEach(function(r){
+    var w = r.t==="main"?3.6:(r.t==="spur"?2.4:2.1);
+    var fc = r.t==="sec" ? "var(--m-road)" : "var(--m-main)";
+    var p=el("polyline",{points:poly(r.p),"class":"rfill","stroke-width":w,"vector-effect":"non-scaling-stroke"});
+    p.setAttribute("stroke",fc);
+    if(r.t==="spur") p.setAttribute("stroke-dasharray","6 4");
+    gWorld.appendChild(p);
+  });
+
+  /* biên giới + ranh tỉnh */
+  gWorld.appendChild(el("polygon",{points:poly(PROVINCE),"class":"bord","vector-effect":"non-scaling-stroke"}));
+  gWorld.appendChild(el("polyline",{points:poly(INTL),"class":"bord intl","vector-effect":"non-scaling-stroke"}));
+
+  /* nhãn — nằm trong lớp riêng để giữ nguyên cỡ chữ khi zoom */
+  gLab=el("g",{id:"labels"});
+  function addLabel(lo,la,cls,txt,anchor){
+    var q=P(lo,la), g=el("g",{}); g._x=q[0]; g._y=q[1];
+    var t=el("text",{x:0,y:0,"class":cls,"text-anchor":anchor||"middle"}); t.textContent=txt;
+    g.appendChild(t); gLab.appendChild(g);
+  }
+  NLAB.forEach(function(d){ addLabel(d.lo,d.la,"nlabel",d.n,d.a); });
+  RIVERS.forEach(function(r){ addLabel(r.lab[0],r.lab[1],"wlabel",r.n,"start"); });
+  DLAB.forEach(function(d){ addLabel(d.lo,d.la,"dlabel",d.n,"middle"); });
+  ROADS.forEach(function(r){
+    if(!r.shield) return;
+    var q=P(r.shield[0],r.shield[1]);
+    var g=el("g",{"class":"shield"}); g._x=q[0]; g._y=q[1];
+    var w=r.n.length*5.4+9;
+    g.appendChild(el("rect",{x:(-w/2).toFixed(1),y:-6.5,width:w.toFixed(1),height:13,rx:3}));
+    var t=el("text",{x:0,y:3.2,"text-anchor":"middle"}); t.textContent=r.n; g.appendChild(t);
+    gLab.appendChild(g);
+  });
+  gWorld.appendChild(gLab);
+
+  gGhost=el("g",{id:"ghosts"}); gRoute=el("g",{id:"routes"}); gPin=el("g",{id:"pins"});
+  gWorld.appendChild(gGhost); gWorld.appendChild(gRoute); gWorld.appendChild(gPin);
+  svg.appendChild(gWorld);
+
+  PRESETS.forEach(function(p){
+    var q=P(p.lo,p.la);
+    var g=el("g",{"class":"ghost"}); g.dataset.name=p.n;
+    g.appendChild(el("circle",{cx:0,cy:0,r:2.8}));
+    var t=el("text",{x:6,y:3.4}); t.textContent=p.n; g.appendChild(t);
+    g._x=q[0]; g._y=q[1];
+    g.addEventListener("click",function(ev){ ev.stopPropagation(); addStop(p); });
+    gGhost.appendChild(g);
+  });
+  applyView();
+}
+
+/* zoom / pan */
+var k=1,tx=0,ty=0;
+function applyView(){
+  gWorld.setAttribute("transform","translate("+tx.toFixed(2)+","+ty.toFixed(2)+") scale("+k.toFixed(4)+")");
+  svg.style.touchAction = k>1.01 ? "none" : "pan-y";
+  var inv=(1/k).toFixed(4);
+  [gLab.children,gGhost.children,gPin.children].forEach(function(coll){
+    for(var i=0;i<coll.length;i++) coll[i].setAttribute("transform","translate("+coll[i]._x.toFixed(1)+","+coll[i]._y.toFixed(1)+") scale("+inv+")");
+  });
+  scaleBar();
+}
+function clampView(){
+  var minX=MW-MW*k, minY=MH-MH*k;
+  tx=Math.min(0,Math.max(minX,tx)); ty=Math.min(0,Math.max(minY,ty));
+}
+function zoomTo(cx,cy,nk){
+  nk=Math.max(1,Math.min(8,nk));
+  tx=cx-(cx-tx)*(nk/k); ty=cy-(cy-ty)*(nk/k); k=nk; clampView(); applyView();
+}
+function fitBox(x0,y0,x1,y1,pad,maxK){
+  pad=pad||40;
+  var w=Math.max(60,x1-x0+pad*2), h=Math.max(60,y1-y0+pad*2);
+  k=Math.max(1,Math.min(maxK||8,Math.min(MW/w,MH/h)));
+  var cx=(x0+x1)/2, cy=(y0+y1)/2;
+  tx=MW/2-cx*k; ty=MH/2-cy*k; clampView(); applyView();
+}
+function fitStops(list){
+  if(!list || !list.length){ k=1;tx=0;ty=0;applyView(); return; }
+  var xs=[],ys=[];
+  list.forEach(function(s){ var q=P(s.lo,s.la); xs.push(q[0]); ys.push(q[1]); });
+  fitBox(Math.min.apply(null,xs),Math.min.apply(null,ys),Math.max.apply(null,xs),Math.max.apply(null,ys),120,2.6);
+}
+function scaleBar(){
+  var w=svg.getBoundingClientRect().width||600;
+  var kmPerUnit=(LON1-LON0)/MW*111.32*Math.cos(22.75*Math.PI/180);
+  var kmPerPx=kmPerUnit/(w/MW*k);
+  if(!isFinite(kmPerPx)||kmPerPx<=0) return;
+  var steps=[1,2,5,10,20,25,50,100,200], want=80*kmPerPx, pick=steps[steps.length-1];
+  for(var i=0;i<steps.length;i++){ if(steps[i]>=want){ pick=steps[i]; break; } }
+  var bar=document.querySelector(".sbar i");
+  if(bar) bar.style.width=Math.max(26,Math.min(150,Math.round(pick/kmPerPx)))+"px";
+  var txt=$("#sbarTxt"); if(txt) txt.textContent=pick+" km";
+}
+function svgPt(ev){ var r=svg.getBoundingClientRect(); return [(ev.clientX-r.left)/r.width*MW,(ev.clientY-r.top)/r.height*MH]; }
+function worldPt(ev){ var p=svgPt(ev); return [(p[0]-tx)/k,(p[1]-ty)/k]; }
+
+/* ============ 6. Pin + lộ trình ============ */
+var PIN="M0,0 C-5.4,-8.2 -9,-11.6 -9,-16.4 A9,9 0 1,1 9,-16.4 C9,-11.6 5.4,-8.2 0,0 Z";
+function sortStops(a,b){
+  var da=a.day||999, dbb=b.day||999;
+  if(da!==dbb) return da-dbb;
+  var sa=SLOTO[a.slot]||0, sb=SLOTO[b.slot]||0;
+  if(sa!==sb) return sa-sb;
+  return (a.ord||0)-(b.ord||0);
+}
+function visible(s){ return filter==="all" || String(s.day||0)===String(filter); }
+
+function drawPins(newId){
+  gPin.textContent=""; gRoute.textContent="";
+  var list=stops.slice().sort(sortStops);
+  if(list.length && (newId || !fitted)){ fitted=true; fitStops(list.filter(visible).length?list.filter(visible):list); }
+
+  var byDay={};
+  list.forEach(function(s){ if(!s.day) return; (byDay[s.day]=byDay[s.day]||[]).push(s); });
+  Object.keys(byDay).forEach(function(d){
+    var arr=byDay[d]; if(arr.length<2) return;
+    if(filter!=="all" && String(d)!==String(filter)) return;
+    var pts=arr.map(function(s){var q=P(s.lo,s.la);return q[0].toFixed(1)+","+q[1].toFixed(1);}).join(" ");
+    gRoute.appendChild(el("polyline",{points:pts,"class":"rcase2","vector-effect":"non-scaling-stroke"}));
+    var ln=el("polyline",{points:pts,"class":"rline","vector-effect":"non-scaling-stroke"});
+    ln.setAttribute("stroke","var(--blue)");
+    gRoute.appendChild(ln);
+  });
+
+  var used={}; stops.forEach(function(s){ used[s.name]=1; });
+  var c=gGhost.children;
+  for(var i=0;i<c.length;i++) c[i].style.display = used[c[i].dataset.name] ? "none" : "";
+
+  var placed=[];
+  list.forEach(function(s,i){
+    var q=P(s.lo,s.la);
+    var g=el("g",{"class":"pin s-"+(s.status||"plan")+(visible(s)?"":" dim")+(hot===s.id?" hot":"")+(newId===s.id?" flash":"")});
+    g.dataset.id=s.id; g._x=q[0]; g._y=q[1];
+    g.appendChild(el("circle",{cx:0,cy:-16.4,r:7,"class":"ring"}));
+    g.appendChild(el("path",{d:PIN,"class":"body"}));
+    var num=el("text",{x:0,y:-13,"class":"num"}); num.textContent=(i+1); g.appendChild(num);
+    var flip=false;
+    for(var pi=0;pi<placed.length;pi++){
+      if(Math.abs(placed[pi][1]-q[1])<16/k && Math.abs(placed[pi][0]-q[0])<130/k){ flip=true; break; }
+    }
+    placed.push(q);
+    var t=flip ? el("text",{x:-11,y:-14,"class":"cap","text-anchor":"end"}) : el("text",{x:11,y:-14,"class":"cap"});
+    t.textContent=s.name; g.appendChild(t);
+    g.addEventListener("click",function(ev){ ev.stopPropagation(); focusRow(s.id); });
+    g.addEventListener("mouseenter",function(){ setHot(s.id); });
+    g.addEventListener("mouseleave",function(){ setHot(null); });
+    gPin.appendChild(g);
+  });
+  applyView();
+}
+function setHot(id){
+  hot=id;
+  var c=gPin.children,i;
+  for(i=0;i<c.length;i++) c[i].classList.toggle("hot", c[i].dataset.id===id);
+  for(var key in rowEls) rowEls[key].classList.toggle("hot", key===id);
+}
+function focusRow(id){
+  var r=rowEls[id]; if(!r) return;
+  r.scrollIntoView({behavior:"smooth",block:"center"});
+  setHot(id); setTimeout(function(){ if(hot===id) setHot(null); },1800);
+}
+
+/* ============ 7. Bảng ============ */
+function opt(v,l){ var o=document.createElement("option"); o.value=v; o.textContent=l; return o; }
+function parseNum(v){ return Number(String(v).replace(/[^\d]/g,""))||0; }
+function debounce(key,fn,ms){ clearTimeout(timers[key]); timers[key]=setTimeout(fn,ms); }
+
+function buildRow(s){
+  var r=document.createElement("div"); r.className="row"; r.dataset.id=s.id;
+  var idx=document.createElement("div"); idx.className="idx"; r.appendChild(idx);
+
+  var nw=document.createElement("div"); nw.className="nmwrap";
+  var n1=document.createElement("div"); n1.className="nm2"; n1.textContent=s.name;
+  var n2=document.createElement("div"); n2.className="dt2";
+  nw.appendChild(n1); nw.appendChild(n2); r.appendChild(nw);
+
+  var f=document.createElement("div"); f.className="f";
+  function wrap(lab,node){ var w=document.createElement("div"); var l=document.createElement("div"); l.className="fl"; l.textContent=lab; w.appendChild(l); w.appendChild(node); return w; }
+
+  var dsel=document.createElement("select"); dsel.className="d";
+  dsel.addEventListener("change",function(){ save(s.id,{day:Number(dsel.value)}); });
+  f.appendChild(wrap("Ngày",dsel));
+
+  var ssel=document.createElement("select"); ssel.className="s";
+  SLOTS.forEach(function(x){ ssel.appendChild(opt(x[0],x[1])); });
+  ssel.addEventListener("change",function(){ save(s.id,{slot:ssel.value}); });
+  f.appendChild(wrap("Buổi",ssel));
+
+  var tsel=document.createElement("select"); tsel.className="t";
+  STATUS.forEach(function(x){ tsel.appendChild(opt(x[0],x[1])); });
+  tsel.addEventListener("change",function(){ save(s.id,{status:tsel.value}); });
+  f.appendChild(wrap("Trạng thái",tsel));
+
+  var ci=document.createElement("input"); ci.className="num c"; ci.type="text"; ci.inputMode="numeric"; ci.placeholder="0";
+  ci.addEventListener("input",function(){ debounce(s.id+"c",function(){ save(s.id,{cost:parseNum(ci.value)}); },500); });
+  ci.addEventListener("blur",function(){ var v=parseNum(ci.value); ci.value=v?vnd(v):""; });
+  f.appendChild(wrap("Chi phí (đ)",ci));
+
+  var hi=document.createElement("input"); hi.className="num h"; hi.type="text"; hi.inputMode="decimal"; hi.placeholder="0";
+  hi.addEventListener("input",function(){ debounce(s.id+"h",function(){ save(s.id,{hours:parseFloat(String(hi.value).replace(",","."))||0}); },500); });
+  f.appendChild(wrap("Giờ",hi));
+  r.appendChild(f);
+
+  var gm=document.createElement("a"); gm.className="gm"; gm.target="_blank"; gm.rel="noopener";
+  gm.title="Mở điểm này trên Google Maps"; gm.textContent="↗"; gm.href=gmUrl(s);
+  r.appendChild(gm);
+
+  var del=document.createElement("button"); del.className="del"; del.type="button"; del.title="Xoá điểm"; del.textContent="×";
+  del.addEventListener("click",function(){ removeStop(s.id); });
+  r.appendChild(del);
+
+  r.addEventListener("mouseenter",function(){ setHot(s.id); });
+  r.addEventListener("mouseleave",function(){ setHot(null); });
+  return r;
+}
+
+function syncRow(r,s,i){
+  r.querySelector(".idx").textContent=i;
+  var n1=r.querySelector(".nm2"); if(n1.textContent!==s.name) n1.textContent=s.name;
+  var n2=r.querySelector(".dt2"); var dt=(s.dist||"")+(s.day?" · Ngày "+s.day:"");
+  if(n2.textContent!==dt) n2.textContent=dt;
+  var gm=r.querySelector("a.gm"); var u=gmUrl(s); if(gm.getAttribute("href")!==u) gm.href=u;
+
+  var dsel=r.querySelector("select.d");
+  if(dsel.options.length!==days+1){
+    dsel.textContent=""; dsel.appendChild(opt("0","—"));
+    for(var j=1;j<=days;j++) dsel.appendChild(opt(String(j),"N"+j));
+  }
+  if(document.activeElement!==dsel) dsel.value=String(s.day||0);
+  var ssel=r.querySelector("select.s"); if(document.activeElement!==ssel) ssel.value=s.slot||"";
+  var tsel=r.querySelector("select.t");
+  if(document.activeElement!==tsel) tsel.value=s.status||"plan";
+  tsel.className="t st-"+(s.status||"plan");
+  var ci=r.querySelector("input.c");
+  if(document.activeElement!==ci){ var cv=s.cost?vnd(s.cost):""; if(ci.value!==cv) ci.value=cv; }
+  var hi=r.querySelector("input.h");
+  if(document.activeElement!==hi){ var hv=s.hours?String(s.hours):""; if(hi.value!==hv) hi.value=hv; }
+  r.hidden=!visible(s);
+}
+
+function render(newId){
+  var list=stops.slice().sort(sortStops);
+  var box=$("#rows"), seen={};
+  list.forEach(function(s,i){
+    seen[s.id]=1;
+    var r=rowEls[s.id];
+    if(!r){ r=buildRow(s); rowEls[s.id]=r; }
+    syncRow(r,s,i+1);
+    box.appendChild(r);
+  });
+  Object.keys(rowEls).forEach(function(id){ if(!seen[id]){ rowEls[id].remove(); delete rowEls[id]; } });
+
+  var shown=list.filter(visible).length;
+  var em=$("#empty");
+  em.hidden = shown>0;
+  if(list.length && !shown){
+    em.querySelector("b").textContent = filter==="0" ? "Không còn điểm nào chưa xếp" : "Ngày "+filter+" chưa có điểm nào";
+    em.lastChild.nodeValue = " Chọn tab này rồi thêm địa điểm, hoặc đổi Ngày ở dòng bất kỳ sang ngày này.";
+  } else {
+    em.querySelector("b").textContent = "Chưa có điểm nào trong lịch";
+    em.lastChild.nodeValue = " Gõ tên một địa điểm ở ô phía trên để bắt đầu, hoặc bấm “Ghim trên bản đồ” rồi chọn vị trí.";
+  }
+  renderTabs(); renderSum(); drawPins(newId); renderRouteLink();
+  $("#cnt").textContent = list.length ? (shown===list.length ? list.length+" điểm" : shown+" / "+list.length+" điểm") : "Chưa có điểm nào";
+}
+
+function renderRouteLink(){
+  var a=$("#gmRoute");
+  var list=stops.slice().sort(sortStops).filter(visible);
+  if(list.length<2){ a.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("Hà Giang, Việt Nam"); a.textContent="Mở Google Maps"; return; }
+  var capped=list.length>11;
+  var use=capped?list.slice(0,11):list;
+  var o=encodeURIComponent(gmTerm(use[0])), d=encodeURIComponent(gmTerm(use[use.length-1]));
+  var wp=use.slice(1,-1).map(function(s){return encodeURIComponent(gmTerm(s));}).join("%7C");
+  a.href="https://www.google.com/maps/dir/?api=1&travelmode=driving&origin="+o+"&destination="+d+(wp?"&waypoints="+wp:"");
+  a.textContent = capped ? "Chỉ đường 11 điểm đầu" : "Chỉ đường trên Google Maps";
+  a.title = capped ? "Google Maps chỉ nhận 9 điểm dừng giữa đường, nên link này lấy 11 điểm đầu của bộ lọc hiện tại." : "Mở lộ trình hiện tại trong Google Maps";
+}
+
+function renderTabs(){
+  var t=$("#tabs"); t.textContent="";
+  function mk(v,label,count){
+    var b=document.createElement("button"); b.className="tab"+(String(filter)===String(v)?" on":""); b.type="button";
+    b.textContent=label;
+    if(count!=null){ var c=document.createElement("span"); c.className="ct"; c.textContent=count; b.appendChild(c); }
+    b.addEventListener("click",function(){ filter=v; render(); fitStops(stops.filter(visible)); });
+    return b;
+  }
+  t.appendChild(mk("all","Tất cả",stops.length));
+  for(var d=1;d<=days;d++){
+    (function(d){ t.appendChild(mk(String(d),"Ngày "+d,stops.filter(function(s){return Number(s.day)===d;}).length)); })(d);
+  }
+  var un=stops.filter(function(s){return !s.day;}).length;
+  if(un) t.appendChild(mk("0","Chưa xếp",un));
+  var add=document.createElement("button"); add.className="tab add"; add.type="button"; add.textContent="+ Thêm ngày";
+  add.addEventListener("click",function(){ if(days<7){ days++; saveMeta(); render(); } else toast("Tối đa 7 ngày"); });
+  t.appendChild(add);
+  if(days>1){
+    var rm=document.createElement("button"); rm.className="tab add"; rm.type="button"; rm.textContent="− Bớt ngày";
+    rm.addEventListener("click",function(){
+      if(stops.some(function(s){return Number(s.day)===days;})){ toast("Ngày "+days+" còn điểm, hãy chuyển sang ngày khác trước"); return; }
+      days--; if(Number(filter)>days) filter="all"; saveMeta(); render();
+    });
+    t.appendChild(rm);
+  }
+}
+
+function renderSum(){
+  var list=stops.filter(visible);
+  var cost=0,hours=0,done=0;
+  list.forEach(function(s){ cost+=Number(s.cost)||0; hours+=Number(s.hours)||0; if(s.status==="done") done++; });
+  var cells=[["Điểm trong lịch",list.length,""],["Đã đi qua",done,list.length?("/ "+list.length):""],["Tổng chi phí",vnd(cost),"đ"],["Tổng giờ dừng",(Math.round(hours*10)/10),"giờ"]];
+  var g=$("#sum"); g.textContent="";
+  cells.forEach(function(c){
+    var d=document.createElement("div"); d.className="st";
+    var kk=document.createElement("div"); kk.className="k"; kk.textContent=c[0];
+    var v=document.createElement("div"); v.className="v"; v.textContent=c[1];
+    if(c[2]){ var sm=document.createElement("small"); sm.textContent=" "+c[2]; v.appendChild(sm); }
+    d.appendChild(kk); d.appendChild(v); g.appendChild(d);
+  });
+}
+
+/* ============ 8. Thêm / sửa / xoá ============ */
+function addStop(p,coords){
+  if(stops.some(function(s){return s.name===p.n;})){ toast("“"+p.n+"” đã có trong lịch"); return; }
+  var day = (filter==="all"||filter==="0") ? 1 : Number(filter);
+  var s={ id:uid(), name:p.n, dist:p.d||"Tự thêm",
+          la: coords?coords.la:p.la, lo: coords?coords.lo:p.lo,
+          day:day, slot:"", status:"plan", cost:0, hours:0, ord:Date.now() };
+  stops.push(s); render(s.id); persistNew(s);
+  $("#q").value=""; hideSugg();
+}
+function removeStop(id){
+  stops=stops.filter(function(s){return s.id!==id;});
+  render();
+  if(cloud && db){ db.collection("stops").doc(id)["delete"]().catch(function(){ toast("Không xoá được trên máy chủ"); }); }
+  else persistLocal();
+}
+function save(id,patch){
+  var s=null; stops.forEach(function(x){ if(x.id===id) s=x; });
+  if(!s) return;
+  for(var p in patch) s[p]=patch[p];
+  render();
+  if(cloud && db){ db.collection("stops").doc(id).update(patch).catch(function(e){ if(e&&e.code==="invalid_argument") toast("Bạn chỉ có quyền xem, thay đổi không được lưu."); }); }
+  else persistLocal();
+}
+function saveMeta(){
+  if(cloud && db){ db.doc("meta/trip").set({days:days}).catch(function(){}); }
+  else persistLocal();
+}
+function persistNew(s){
+  if(cloud && db){
+    var body={}; for(var p in s) if(p!=="id") body[p]=s[p];
+    db.collection("stops").doc(s.id).set(body).catch(function(e){ if(e&&e.code==="invalid_argument") toast("Bạn chỉ có quyền xem, điểm này chưa được lưu."); });
+  } else persistLocal();
+}
+function persistLocal(){ try{ localStorage.setItem("hg-trip",JSON.stringify({days:days,stops:stops})); }catch(e){} }
+function loadLocal(){
+  try{
+    var raw=localStorage.getItem("hg-trip"); if(!raw) return false;
+    var o=JSON.parse(raw); if(!o||!Array.isArray(o.stops)) return false;
+    stops=o.stops; days=o.days||3; return true;
+  }catch(e){ return false; }
+}
+
+/* ============ 9. Gợi ý ============ */
+function norm(s){ return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d"); }
+var selIdx=-1, curList=[];
+function showSugg(){
+  var q=$("#q").value.trim(), nq=norm(q), box=$("#sugg");
+  var used={}; stops.forEach(function(s){ used[s.name]=1; });
+  curList = PRESETS.filter(function(p){ return !nq || norm(p.n).indexOf(nq)>=0 || norm(p.d).indexOf(nq)>=0; }).slice(0,40);
+  box.textContent="";
+  curList.forEach(function(p,i){
+    var d=document.createElement("div"); d.className="sg"+(used[p.n]?" used":"")+(i===selIdx?" sel":"");
+    var ic=document.createElement("i"); ic.className="ic";
+    var nm=document.createElement("span"); nm.className="nm"; nm.textContent=p.n;
+    var dt=document.createElement("span"); dt.className="dt"; dt.textContent=used[p.n]?"đã thêm":p.d;
+    d.appendChild(ic); d.appendChild(nm); d.appendChild(dt);
+    d.addEventListener("mousedown",function(ev){ ev.preventDefault(); addStop(p); });
+    box.appendChild(d);
+  });
+  if(q && !curList.some(function(p){return norm(p.n)===nq;})){
+    var d2=document.createElement("div"); d2.className="sg new"+(selIdx===curList.length?" sel":"");
+    var ic2=document.createElement("i"); ic2.className="ic";
+    var nm2=document.createElement("span"); nm2.className="nm"; nm2.textContent="Ghim “"+q+"” lên bản đồ";
+    var dt2=document.createElement("span"); dt2.className="dt"; dt2.textContent="bấm rồi chọn vị trí";
+    d2.appendChild(ic2); d2.appendChild(nm2); d2.appendChild(dt2);
+    d2.addEventListener("mousedown",function(ev){ ev.preventDefault(); startPin(); });
+    box.appendChild(d2);
+  }
+  if(!box.children.length){ var e2=document.createElement("div"); e2.className="sgempty"; e2.textContent="Không tìm thấy — gõ tên rồi ghim lên bản đồ."; box.appendChild(e2); }
+  box.hidden=false;
+}
+function hideSugg(){ $("#sugg").hidden=true; selIdx=-1; }
+function startPin(){
+  pinning=true; svg.classList.add("pinning"); $("#pinMode").classList.add("on"); hideSugg();
+  toast($("#q").value.trim() ? "Bấm lên bản đồ để ghim “"+$("#q").value.trim()+"”" : "Gõ tên điểm rồi bấm lên bản đồ");
+}
+function stopPin(){ pinning=false; svg.classList.remove("pinning"); $("#pinMode").classList.remove("on"); }
+
+/* ============ 10. Sự kiện ============ */
+function wire(){
+  var q=$("#q");
+  q.addEventListener("focus",showSugg);
+  q.addEventListener("input",function(){ selIdx=-1; showSugg(); });
+  q.addEventListener("blur",function(){ setTimeout(hideSugg,120); });
+  q.addEventListener("keydown",function(ev){
+    var max=curList.length-(q.value.trim()?0:1);
+    if(ev.key==="ArrowDown"){ ev.preventDefault(); selIdx=Math.min(selIdx+1,max); showSugg(); }
+    else if(ev.key==="ArrowUp"){ ev.preventDefault(); selIdx=Math.max(selIdx-1,0); showSugg(); }
+    else if(ev.key==="Enter"){
+      ev.preventDefault();
+      if(selIdx>=0 && selIdx<curList.length) addStop(curList[selIdx]);
+      else if(selIdx<0 && curList.length===1) addStop(curList[0]);
+      else if(q.value.trim()) startPin();
+    } else if(ev.key==="Escape"){ hideSugg(); stopPin(); }
+  });
+  $("#pinMode").addEventListener("click",function(){ pinning?stopPin():startPin(); });
+
+  $("#zIn").addEventListener("click",function(){ zoomTo(MW/2,MH/2,k*1.5); });
+  $("#zOut").addEventListener("click",function(){ zoomTo(MW/2,MH/2,k/1.5); });
+  $("#zFit").addEventListener("click",function(){ var l=stops.filter(visible); fitStops(l.length?l:stops); });
+
+  var drag=null;
+  svg.addEventListener("pointerdown",function(ev){
+    if(pinning) return;
+    drag={x:ev.clientX,y:ev.clientY,tx:tx,ty:ty};
+    try{svg.setPointerCapture(ev.pointerId);}catch(e){}
+    svg.classList.add("grabbing");
+  });
+  svg.addEventListener("pointermove",function(ev){
+    if(!drag) return;
+    var r=svg.getBoundingClientRect();
+    tx=drag.tx+(ev.clientX-drag.x)/r.width*MW; ty=drag.ty+(ev.clientY-drag.y)/r.height*MH;
+    clampView(); applyView();
+  });
+  function endDrag(ev){ if(drag){ try{svg.releasePointerCapture(ev.pointerId);}catch(e){} } drag=null; svg.classList.remove("grabbing"); }
+  svg.addEventListener("pointerup",endDrag);
+  svg.addEventListener("pointercancel",endDrag);
+  svg.addEventListener("wheel",function(ev){ ev.preventDefault(); var p=svgPt(ev); zoomTo(p[0],p[1],k*(ev.deltaY<0?1.18:1/1.18)); },{passive:false});
+
+  svg.addEventListener("click",function(ev){
+    if(!pinning) return;
+    var name=$("#q").value.trim();
+    if(!name){ toast("Hãy gõ tên điểm trước"); return; }
+    var w=worldPt(ev), c=invP(w[0],w[1]);
+    addStop({n:name,d:"Tự thêm"},{la:c.la,lo:c.lo});
+    stopPin();
+  });
+
+  $("#copy").addEventListener("click",function(){
+    var list=stops.slice().sort(sortStops), out=["LỊCH TRÌNH HÀ GIANG"], cur=null;
+    list.forEach(function(s){
+      var d=s.day?("NGÀY "+s.day):"CHƯA XẾP";
+      if(d!==cur){ out.push(""); out.push(d); cur=d; }
+      var sl=""; SLOTS.forEach(function(x){ if(x[0]===s.slot&&x[0]) sl=x[1]+" — "; });
+      var st=""; STATUS.forEach(function(x){ if(x[0]===s.status) st=x[1]; });
+      out.push("  • "+sl+s.name+(s.dist?" ("+s.dist+")":"")+" ["+st+"]"+(s.cost?" "+vnd(s.cost)+"đ":"")+(s.hours?" "+s.hours+"h":""));
+    });
+    var txt=out.join("\n");
+    try{ navigator.clipboard.writeText(txt).then(function(){toast("Đã sao chép lịch trình");},function(){toast("Không sao chép được, hãy bôi đen thủ công");}); }
+    catch(e){ toast("Không sao chép được trên trình duyệt này"); }
+  });
+  $("#clearDone").addEventListener("click",function(){
+    var gone=stops.filter(function(s){return s.status==="skip";});
+    if(!gone.length){ toast("Không có điểm nào đang “Bỏ qua”"); return; }
+    gone.forEach(function(s){ removeStop(s.id); });
+    toast("Đã xoá "+gone.length+" điểm");
+  });
+  window.addEventListener("resize",function(){ debounce("rs",scaleBar,150); });
+}
+
+/* ============ 11. Lưu chung + realtime ============ */
+function setLive(cls,txt){ $("#live").className="live "+cls; $("#liveTxt").textContent=txt; }
+function use(n){
+  var C=window.claude;
+  if(!C||typeof C.use!=="function") return Promise.resolve(null);
+  try{ return C.use(n).catch(function(){return null;}); }catch(e){ return Promise.resolve(null); }
+}
+function startCloud(){
+  Promise.all([use("db"),use("room")]).then(function(r){
+    db=r[0]; roomNs=r[1];
+    if(!db){ cloud=false; setLive("off","Lưu trên máy này"); if(!stops.length&&loadLocal()) render(); return; }
+    cloud=true; setLive("on","Lưu chung · đồng bộ");
+    db.doc("meta/trip").onSnapshot(function(snap){
+      if(snap.exists){ var d=snap.data(); if(d&&d.days){ days=Math.max(1,Math.min(7,Number(d.days)||3)); render(); } }
+    },function(){});
+    db.collection("stops").onSnapshot(function(snap){
+      var next=[]; snap.docs.forEach(function(d){ var v=d.data()||{}; v.id=d.id; next.push(v); });
+      stops=next; render();
+    },function(){ cloud=false; setLive("off","Mất kết nối – đang lưu tạm trên máy"); });
+    if(roomNs){
+      try{
+        roomNs.presence({at:"hagiang"});
+        roomNs.onPeers(function(ch){
+          var n=0; (ch.peers||[]).forEach(function(p){ if(p.kind==="viewer") n++; });
+          setLive("on", n>1 ? (n+" người đang mở") : "Lưu chung · đồng bộ");
+        },function(){});
+      }catch(e){}
+    }
+  });
+  setTimeout(function(){ if(!cloud&&!db){ setLive("off","Lưu trên máy này"); if(!stops.length&&loadLocal()) render(); } },11000);
+}
+
+buildMap(); wire(); render(); setLive("","Đang kết nối…"); startCloud();
+})();
+</script>
+
+</body></html>
